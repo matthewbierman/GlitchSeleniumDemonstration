@@ -17,5 +17,17 @@ Steps:
 7. Glitch stores keys and other information you do not want made public in a .env file, click on the .env file and enter in GOOGLEAPIKEY={key}. I will provide an active key during the demonstration.
 8. After you update the environment, you should notice in the log window that the application will automatically be restarted, return to the Index page and you may notice that the page has been automatically reloaded.
 9. Try to enter in another address or zipcode and click the "Lunch!" button, it should now add a place to the list whenever you click the button.
-
+10. Next we are going to run some automated test against against our new site, start by cloning the project using Git
+11. [Optional] Create a directory for the test project, using Git Bash I entered in:
+    cd C:
+    mkdir testproject
+12. Open Git Bash and use the "cd" command to make the current directory your project directory "cd testproject"
+13. Clone the test project using the following command "git clone https://github.com/matthewbierman/LetsFindLunchTestSample.git"
+14. Open VS Code.
+15. Navigate to your project folder, I used File->Open Folder and navigated to "C:\testproject\LetsFindLunchTestSample"
+16. You may get a notice about missing packages, if you do you can restore them using the "Restore" button provided, other wise open the terminal (View->Integrated Terminal) and run the command "dotnet restore". This downloads the needed packages/references to the Selenium Webdriver and Selenium Chrome Webdriver libraries.
+17. Open the file IndexTest.cs, this contains two unit test that use Selenium. Find the property "indexURL" (currently line 65) and update the url to your sample app.
+18. To run our test in the terminal type in "dotnet xunit". A Chrome window should be displayed and you should see the test being run, both test should run succesfully.
+  You may get an error "The specified framework 'Microsoft.NETCore.App', version '2.0.5' was not found." 
+  This requires you update the value "RuntimeFrameworkVersion" in LetsFindLunchTest.csproj to your correct runtime version found in "C:\Program Files\dotnet\shared\Microsoft.NETCore.App"
 
