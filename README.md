@@ -1,6 +1,6 @@
 # Creating a website with Glitch and testing it with Selenium
 
-If you want to follow along you will need the latest version of Chrome, A GitHub account, VSCode, and Git Bash (or other Git client). The github account will be used to login/create an account on Glitch
+If you want to follow along you will need the latest version of Chrome, A GitHub account, VSCode (Optional:C# extension), and Git Bash (or other Git client). The github account will be used to login/create an account on Glitch.
 
 What is Glitch? Glitch is free to use online node.js developement environment. It was created by FogCreek, a company that makes developer tools, created Trello and co-created Stack Overflow. Until recently Glitch was listed as Beta.
 
