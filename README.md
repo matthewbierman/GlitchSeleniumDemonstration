@@ -45,7 +45,7 @@ Steps:
         {
             fetchNewLunch(location);
         }  
-21. The preview page should reresh automatically, now if we click the "Lunch!" button, we should get an alert that says "please enter a location".
+21. The preview page should refresh automatically, now if we click the "Lunch!" button, we should get an alert that says "please enter a location".
 22. Lets return to our unit test project in VS Code and add a unit test.
 23. Open IndexTest.cs and add the following code at line 12:
 
