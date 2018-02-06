@@ -30,4 +30,40 @@ Steps:
 18. To run our test in the terminal type in "dotnet xunit". A Chrome window should be displayed and you should see the test being run, both test should run succesfully.
   You may get an error "The specified framework 'Microsoft.NETCore.App', version '2.0.5' was not found." 
   This requires you update the value "RuntimeFrameworkVersion" in LetsFindLunchTest.csproj to your correct runtime version found in "C:\Program Files\dotnet\shared\Microsoft.NETCore.App"
+19. Currently if we enter no address and click the button it tries the service and we get an error, lets add some javascript to test for this and then add a unit test to test the new feature.
+20. Return to your Glitch app and open up the file "public/scripts/index.js". Replace line 45 
 
+        fetchNewLunch(location);
+        
+    with:
+    
+        if(location === "")
+        {
+            alert("please enter a location");
+        }
+        else
+        {
+            fetchNewLunch(location);
+        }  
+21. The preview page should reresh automatically, now if we click the "Lunch!" button, we should get an alert that says "please enter a location".
+22. Lets return to our unit test project in VS Code and add a unit test.
+23. Open IndexTest.cs and add the following code at line 12:
+
+        [Fact]
+        public void AlertForEmptyLocation()
+        {
+            Driver.Navigate().GoToUrl(indexURL);
+
+            var txtLocation = GetElement(By.Id("txtLocation"));
+
+            Assert.True(txtLocation.Text == string.Empty);
+
+            var btnFindLunch = GetElement(By.Id("btnFindLunch"));
+
+            btnFindLunch.Click();
+
+            IAlert alert = Driver.SwitchTo().Alert();
+
+            Assert.True(alert.Text == "please enter a location");
+        }
+24. Be sure to save your changes (Ctrl-S) and run the unit test again, you should now have 3 successfull test.
