@@ -27,8 +27,8 @@ Steps:
 13. Clone the test project using the following command "git clone https://github.com/matthewbierman/LetsFindLunchTestSample.git"
 14. Open VS Code.
 15. Navigate to your project folder, I used File->Open Folder and navigated to "C:\testproject\LetsFindLunchTestSample"
-16. You may get a notice about missing packages, if you do you can restore them using the "Restore" button provided, other wise open the terminal (View->Integrated Terminal) and run the command "dotnet restore". This downloads the needed packages/references to the Selenium Webdriver and Selenium Chrome Webdriver libraries.
-17. Open the file IndexTest.cs, this contains two unit test that use Selenium. Find the property "indexURL" (currently line 65) and update the url to your sample app.
+16. You may get a notice about missing packages, if you do you can restore them using the "Restore" button provided, otherwise open the terminal (View->Integrated Terminal) and run the command "dotnet restore". This downloads the needed packages/references to the Selenium Webdriver and Selenium Chrome Webdriver libraries.
+17. Open the file IndexTest.cs, this contains two unit test that use Selenium. Find the property "indexURL" (currently line 17) and update the url to your sample app.
 18. To run our test in the terminal type in "dotnet xunit". A Chrome window should be displayed and you should see the test being run, both test should run succesfully.
   You may get an error "The specified framework 'Microsoft.NETCore.App', version '2.0.5' was not found." 
   This requires you update the value "RuntimeFrameworkVersion" in LetsFindLunchTest.csproj to your correct runtime version found in "C:\Program Files\dotnet\shared\Microsoft.NETCore.App"
@@ -47,25 +47,31 @@ Steps:
         {
             fetchNewLunch(location);
         }  
+        
 21. The preview page should refresh automatically, now if we click the "Lunch!" button, we should get an alert that says "please enter a location".
 22. Lets return to our unit test project in VS Code and add a unit test.
-23. Open IndexTest.cs and add the following code at line 12:
+23. Open IndexTest.cs and add the following code at line 19:
 
         [Fact]
         public void AlertForEmptyLocation()
         {
-            Driver.Navigate().GoToUrl(indexURL);
+            var driver = webDrivers.GetChromeDriver();
 
-            var txtLocation = GetElement(By.Id("txtLocation"));
+            driver.Navigate().GoToUrl(indexURL);
+
+            var txtLocation = driver.GetElement(By.Id("txtLocation"));
 
             Assert.True(txtLocation.Text == string.Empty);
 
-            var btnFindLunch = GetElement(By.Id("btnFindLunch"));
+            var btnFindLunch = driver.GetElement(By.Id("btnFindLunch"));
 
             btnFindLunch.Click();
 
-            IAlert alert = Driver.SwitchTo().Alert();
+            IAlert alert = driver.SwitchTo().Alert();
+
+            //driver.TakeScreenShot("AlertForEmptyLocation");  you can get a screenshot of an alert using Selenium
 
             Assert.True(alert.Text == "please enter a location");
         }
+        
 24. Be sure to save your changes (Ctrl-S) and run the unit test again, you should now have 3 successfull test.
