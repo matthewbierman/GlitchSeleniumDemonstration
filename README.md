@@ -69,7 +69,7 @@ Steps:
 
             IAlert alert = driver.SwitchTo().Alert();
 
-            //driver.TakeScreenShot("AlertForEmptyLocation");  you can get a screenshot of an alert using Selenium
+            //driver.TakeScreenShot("AlertForEmptyLocation");  you can not get a screenshot of an alert using Selenium
 
             Assert.True(alert.Text == "please enter a location");
         }
